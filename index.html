@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble & Spin Laundromat</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom icon styles */
+        .icon-washing-machine {
+            display: inline-block;
+            width: 1.25em;
+            height: 1.25em;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            vertical-align: middle;
+            margin-right: 1rem;
+            min-width: 25px;
+            text-align: center;
+        }
+        
+        .icon-washing-machine svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+
+        /* Animation for the washing machine drum */
+        @keyframes rotate-drum {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .icon-washing-machine .drum {
+            transform-origin: center;
+            animation: rotate-drum 8s linear infinite;
+            animation-play-state: paused;
+        }
+        
+        .top-menu-nav a:hover .drum,
+        .top-menu-nav a.active .drum {
+            animation-play-state: running;
+        }
+    </style>
+</head>
+<body>
+    <div class="bubble-container" id="bubble-background"></div>
+    
+    <!-- Mobile Menu Toggle Button -->
+    <button class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Top Menu Navigation -->
+    <nav class="top-menu" id="top-menu">
+        <div class="top-menu-header">
+            <div class="logo-wrapper">
+                <img src="assets/images/logo.svg" alt="Bubble & Spin Laundromat Logo" class="logo" id="main-logo">
+                <h1>Bubble & Spin</h1>
+            </div>
+            
+            <div class="top-menu-nav">
+                <ul>
+                    <li><a href="#home" class="active"><i class="fas fa-home"></i> <span class="nav-text">Home</span></a></li>
+                    <li><a href="#machine-status">
+                        <span class="icon-washing-machine">
+                            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M452 96H60c-33.1 0-60 26.9-60 60v240c0 33.1 26.9 60 60 60h392c33.1 0 60-26.9 60-60V156c0-33.1-26.9-60-60-60zM60 120h392c19.8 0 36 16.2 36 36v24H24v-24c0-19.8 16.2-36 36-36zm392 312H60c-19.8 0-36-16.2-36-36V204h464v192c0 19.8-16.2 36-36 36z"/>
+                                <g class="drum">
+                                    <circle cx="256" cy="300" r="100"/>
+                                    <circle cx="256" cy="300" r="88" fill="none" stroke="currentColor" stroke-width="16"/>
+                                    <circle cx="220" cy="260" r="10" fill="currentColor" opacity="0.5"/>
+                                    <circle cx="280" cy="330" r="8" fill="currentColor" opacity="0.5"/>
+                                    <circle cx="230" cy="350" r="12" fill="currentColor" opacity="0.5"/>
+                                    <circle cx="290" cy="270" r="9" fill="currentColor" opacity="0.5"/>
+                                </g>
+                                <circle cx="96" cy="160" r="16"/>
+                                <circle cx="144" cy="160" r="16"/>
+                                <path d="M384 128h64v64h-64z"/>
+                            </svg>
+                        </span>
+                        <span class="nav-text">Machines</span>
+                    </a></li>
+                    <li><a href="#services"><i class="fas fa-concierge-bell"></i> <span class="nav-text">Services</span></a></li>
+                    <li><a href="#booking"><i class="fas fa-calendar-alt"></i> <span class="nav-text">Booking</span></a></li>
+                    <li><a href="#membership"><i class="fas fa-user"></i> <span class="nav-text">Membership</span></a></li>
+                    <li><a href="#promotions"><i class="fas fa-tag"></i> <span class="nav-text">Promotions</span></a></li>
+                    <li><a href="#location"><i class="fas fa-map-marker-alt"></i> <span class="nav-text">Location</span></a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> <span class="nav-text">Contact</span></a></li>
+                </ul>
+            </div>
+            
+            <!-- Dark mode toggle will be added via JavaScript -->
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2>Fresh, Clean, Convenient</h2>
+                <p>Your neighborhood laundromat with modern amenities, affordable prices, and a commitment to cleanliness.</p>
+                <button class="cta-button">Book a Machine Now</button>
+            </div>
+        </section>
+
+        <section id="machine-status" class="status-section">
+            <div class="container">
+                <h2>Real-Time Machine Status</h2>
+                <div class="status-container">
+                    <div class="status-widget">
+                        <i class="fas fa-washer fa-3x" style="color: var(--primary-color); margin-bottom: 1rem;"></i>
+                        <h3>Washers</h3>
+                        <p><span id="washers-available">3</span> available / <span id="washers-total">5</span> total</p>
+                    </div>
+                    <div class="status-widget">
+                        <i class="fas fa-dryer fa-3x" style="color: var(--primary-color); margin-bottom: 1rem;"></i>
+                        <h3>Dryers</h3>
+                        <p><span id="dryers-available">2</span> available / <span id="dryers-total">4</span> total</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services-section">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="services-container">
+                    <div class="service-card">
+                        <i class="fas fa-tshirt fa-3x" style="color: var(--primary-color); margin-bottom: 1rem;"></i>
+                        <h3>Self-Service Wash</h3>
+                        <p>High-efficiency washers and dryers available 7 days a week.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-hands-wash fa-3x" style="color: var(--primary-color); margin-bottom: 1rem;"></i>
+                        <h3>Drop-Off Service</h3>
+                        <p>Leave your laundry with us, and we'll wash, dry, and fold it for you.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-spray-can fa-3x" style="color: var(--primary-color); margin-bottom: 1rem;"></i>
+                        <h3>Dry Cleaning</h3>
+                        <p>Professional dry cleaning for your delicate garments.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="booking" class="booking-section">
+            <div class="container">
+                <h2>Online Booking</h2>
+                <form id="booking-form" class="form">
+                    <div class="form-group">
+                        <label for="booking-date">Date</label>
+                        <input type="date" id="booking-date" name="booking-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-time">Time</label>
+                        <input type="time" id="booking-time" name="booking-time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="machine-type">Machine Type</label>
+                        <select id="machine-type" name="machine-type" required>
+                            <option value="">Select a machine</option>
+                            <option value="washer">Washer</option>
+                            <option value="dryer">Dryer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-email">Email</label>
+                        <input type="email" id="customer-email" name="customer-email" required>
+                    </div>
+                    <button type="submit" class="submit-button">Book Now</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="membership" class="membership-section">
+            <div class="container">
+                <h2>Membership</h2>
+                <div class="membership-container">
+                    <div class="login-container">
+                        <h3>Member Login</h3>
+                        <form id="login-form" class="form">
+                            <div class="form-group">
+                                <label for="login-email">Email</label>
+                                <input type="email" id="login-email" name="login-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password">Password</label>
+                                <input type="password" id="login-password" name="login-password" required>
+                            </div>
+                            <button type="submit" class="submit-button">Login</button>
+                        </form>
+                    </div>
+                    <div class="register-container">
+                        <h3>Register</h3>
+                        <form id="register-form" class="form">
+                            <div class="form-group">
+                                <label for="register-name">Name</label>
+                                <input type="text" id="register-name" name="register-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="register-email">Email</label>
+                                <input type="email" id="register-email" name="register-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="register-password">Password</label>
+                                <input type="password" id="register-password" name="register-password" required>
+                            </div>
+                            <button type="submit" class="submit-button">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="promotions" class="promotions-section">
+            <div class="container">
+                <h2>Promotions & Loyalty</h2>
+                <div class="promotions-container">
+                    <div class="promotion-card">
+                        <i class="fas fa-tag fa-2x" style="color: var(--accent-color); margin-bottom: 1rem;"></i>
+                        <h3>Weekly Special</h3>
+                        <p>20% off on all washes on Tuesdays!</p>
+                    </div>
+                    <div class="promotion-card">
+                        <i class="fas fa-medal fa-2x" style="color: var(--accent-color); margin-bottom: 1rem;"></i>
+                        <h3>Loyalty Program</h3>
+                        <p>Earn points with every wash. 10 points = 1 free wash!</p>
+                    </div>
+                    <div class="loyalty-status">
+                        <i class="fas fa-star fa-2x" style="color: var(--primary-color); margin-bottom: 1rem;"></i>
+                        <h3>Your Loyalty Status</h3>
+                        <p>Current Points: <span id="loyalty-points">0</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="location" class="location-section">
+            <div class="container">
+                <h2>Location & Hours</h2>
+                <div class="location-container">
+                    <div class="hours-container">
+                        <i class="fas fa-clock fa-2x" style="color: var(--primary-color); margin-bottom: 1rem;"></i>
+                        <h3>Store Hours</h3>
+                        <ul>
+                            <li><strong>Monday - Friday:</strong> 6:00 AM - 10:00 PM</li>
+                            <li><strong>Saturday - Sunday:</strong> 7:00 AM - 9:00 PM</li>
+                        </ul>
+                    </div>
+                    <div class="map-container">
+                        <h3>Find Us</h3>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000.0!2d-74.0!3d40.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQyJzAwLjAiTiA3NMKwMDAnMDAuMCJX!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
+                            width="100%"
+                            height="300"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy">
+                        </iframe>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Laundry Lane, Cleanville, NY 10001</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Get in Touch</h3>
+                        <p><i class="fas fa-phone"></i> <strong>Phone:</strong> (555) 123-4567</p>
+                        <p><i class="fas fa-envelope"></i> <strong>Email:</strong> info@bubbleandspin.com</p>
+                        <p><i class="fas fa-clock"></i> <strong>Response Time:</strong> Within 24 hours</p>
+                        <div class="social-contact">
+                            <h4>Connect With Us</h4>
+                            <div class="social-icons">
+                                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form-container">
+                        <h3>Send a Message</h3>
+                        <form id="contact-form" class="form">
+                            <div class="form-group">
+                                <label for="contact-name">Name</label>
+                                <input type="text" id="contact-name" name="contact-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Email</label>
+                                <input type="email" id="contact-email" name="contact-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message">Message</label>
+                                <textarea id="contact-message" name="contact-message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-button">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="assets/images/logo.svg" alt="Bubble & Spin Logo" width="60">
+                <h3>Bubble & Spin Laundromat</h3>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i> Facebook</a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+            <div class="footer-nav">
+                <a href="#home">Home</a>
+                <a href="#machine-status">Machines</a>
+                <a href="#services">Services</a>
+                <a href="#membership">Membership</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Bubble & Spin Laundromat. All rights reserved.</p>
+                <p>Designed for a fresh laundry experience</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+    <!-- Custom dev toolbar (only loads in development mode) -->
+    <script src="assets/js/stagewise-simple.js"></script>
+</body>
+</html> 

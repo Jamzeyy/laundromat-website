@@ -1,0 +1,25 @@
+{
+  "name": "laundromat-website",
+  "version": "1.0.0",
+  "description": "A local coin-laundromat website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "cross-env NODE_ENV=development nodemon server.js"
+  },
+  "keywords": [
+    "laundromat",
+    "booking",
+    "local-business"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@stagewise/toolbar": "^0.1.0",
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.22"
+  }
+}

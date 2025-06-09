@@ -1,0 +1,51 @@
+# Node.js dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.local
+
+# IDE/Editor files
+.vscode/
+.idea/
+
+# Generated images (if you don't want to track them)
+images/
+
+# Test and development files
+*-test.html
+*-demo.html
+test-*.html
+test-*.js
+*.bat
+cmd-test.*
+try-options.*
+generate-image*
+direct-mcp.js
+setup-stagewise.js
+
+# Log files
+*.log
+npm-debug.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# MCP service files (these seem to be temp files)
+call
+describe
+generate
+generate-image
+help
+list
+mcp
+mcp-fal-ai-image
+run
+minimal.json
+image-request.json
+"Modern laundromat with blue tones and washing machines"
